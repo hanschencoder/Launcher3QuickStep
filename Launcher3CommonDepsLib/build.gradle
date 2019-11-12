@@ -1,0 +1,60 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.google.protobuf'
+
+android {
+    compileSdkVersion 29
+    defaultConfig {
+        minSdkVersion 28
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java']
+            res.srcDirs = ['src/main/res']
+            manifest.srcFile 'src/main/AndroidManifest-common.xml'
+            proto {
+                srcDir 'src/main/protos'
+                srcDir 'src/main/proto_overrides'
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.0.0'
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                javanano {
+                    option "enum_style=java"
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api project(':iconloaderlib')
+    api project(':LauncherPluginLib')
+    api group: 'com.google.protobuf.nano', name: 'protobuf-javanano', version: '3.1.0'
+    api group: 'androidx.recyclerview', name: 'recyclerview', version: '1.0.0'
+    api group: 'androidx.dynamicanimation', name: 'dynamicanimation', version: '1.0.0'
+    api group: 'androidx.preference', name: 'preference', version: '1.1.0'
+}

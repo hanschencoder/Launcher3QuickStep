@@ -1,0 +1,70 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    defaultConfig {
+        applicationId "com.android.launcher3"
+        minSdkVersion 28
+        targetSdkVersion 29
+        versionCode 100
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs {
+        platform {
+            keyAlias 'platform'
+            keyPassword '123456'
+            storeFile file('../keystore/platform.keystore')
+            storePassword '123456'
+        }
+        shared {
+            keyAlias 'shared'
+            keyPassword '123456'
+            storeFile file('../keystore/shared.keystore')
+            storePassword '123456'
+        }
+        media {
+            keyAlias 'media'
+            keyPassword '123456'
+            storeFile file('../keystore/media.keystore')
+            storePassword '123456'
+        }
+        testkey {
+            keyAlias 'testkey'
+            keyPassword '123456'
+            storeFile file('../keystore/testkey.keystore')
+            storePassword '123456'
+        }
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            if (variant.buildType.name == 'release') {
+                outputFileName = "Launcher3QuickStep-v${defaultConfig.versionName}-release.apk"
+            } else {
+                outputFileName = "Launcher3QuickStep-v${defaultConfig.versionName}-debug.apk"
+            }
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.testkey
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.testkey
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            minifyEnabled false
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':Launcher3QuickStepLib')
+    testImplementation 'junit:junit:4.12'
+}
