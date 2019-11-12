@@ -6,8 +6,8 @@ android {
         applicationId "com.android.launcher3"
         minSdkVersion 28
         targetSdkVersion 29
-        versionCode 100
-        versionName "1.0"
+        versionCode 29
+        versionName "10"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
@@ -36,15 +36,6 @@ android {
             storePassword '123456'
         }
     }
-    applicationVariants.all { variant ->
-        variant.outputs.all {
-            if (variant.buildType.name == 'release') {
-                outputFileName = "Launcher3QuickStep-v${defaultConfig.versionName}-release.apk"
-            } else {
-                outputFileName = "Launcher3QuickStep-v${defaultConfig.versionName}-debug.apk"
-            }
-        }
-    }
     buildTypes {
         release {
             signingConfig signingConfigs.testkey
@@ -57,6 +48,15 @@ android {
             minifyEnabled false
         }
     }
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            if (variant.buildType.name == 'release') {
+                outputFileName = "Launcher3QuickStep-v${defaultConfig.versionName}-release.apk"
+            } else {
+                outputFileName = "Launcher3QuickStep-v${defaultConfig.versionName}-debug.apk"
+            }
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -64,7 +64,11 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':Launcher3QuickStepLib')
-    testImplementation 'junit:junit:4.12'
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api project(':Launcher3QuickStepLib')
+    androidTestImplementation 'junit:junit:4.12'
+    androidTestImplementation group: 'androidx.test', name: 'runner', version: '1.2.0'
+    androidTestImplementation group: 'androidx.test', name: 'rules', version: '1.2.0'
+    androidTestImplementation group: 'androidx.test.uiautomator', name: 'uiautomator', version: '2.2.0'
+    androidTestImplementation group: 'org.mockito', name: 'mockito-android', version: '3.1.0'
 }

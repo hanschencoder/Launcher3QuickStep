@@ -23,7 +23,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':LauncherPluginLib')
-    implementation group: 'com.google.android.material', name: 'material', version: '1.0.0'
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api project(':LauncherPluginLib')
+    api group: 'com.google.android.material', name: 'material', version: '1.0.0'
 }

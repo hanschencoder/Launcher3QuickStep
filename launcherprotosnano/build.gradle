@@ -45,6 +45,6 @@ protobuf {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation group: 'com.google.protobuf.nano', name: 'protobuf-javanano', version: '3.1.0'
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api group: 'com.google.protobuf.nano', name: 'protobuf-javanano', version: '3.1.0'
 }

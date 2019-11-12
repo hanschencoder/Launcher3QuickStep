@@ -23,6 +23,6 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':PluginCoreLib')
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api project(':PluginCoreLib')
 }

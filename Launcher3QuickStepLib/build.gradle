@@ -8,21 +8,8 @@ android {
         versionCode 1
         versionName "1.0"
     }
-    signingConfigs {
-        debug {
-            keyAlias 'platform'
-            keyPassword '123456'
-            storeFile file('../keystore/platform.keystore')
-            storePassword '12345'
-        }
-    }
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-        debug {
-            signingConfig signingConfigs.debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -63,10 +50,10 @@ preBuild {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api fileTree(dir: 'libs', include: ['*.jar'])
     compileOnly files('../libs/framework.jar')
-    implementation project(':SystemUISharedLib')
-    implementation project(':launcherprotosnano')
-    implementation project(':Launcher3CommonDepsLib')
-    implementation project(':SecondaryDisplayLauncherLib')
+    api project(':SystemUISharedLib')
+    api project(':launcherprotosnano')
+    api project(':Launcher3CommonDepsLib')
+    api project(':SecondaryDisplayLauncherLib')
 }

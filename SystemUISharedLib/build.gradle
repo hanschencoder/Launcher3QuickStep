@@ -45,7 +45,7 @@ preBuild {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api fileTree(dir: 'libs', include: ['*.jar'])
     compileOnly files('../libs/framework.jar')
     api project(':PluginCoreLib')
 }

@@ -8,3 +8,11 @@ include ':launcherprotosnano'
 include ':PluginCoreLib'
 include ':SystemUISharedLib'
 include ':iconloaderlib'
+
+buildCache {
+    local(DirectoryBuildCache) {
+        enabled = true
+        directory = new File(rootDir, 'build-cache')
+        removeUnusedEntriesAfterDays = 30
+    }
+}

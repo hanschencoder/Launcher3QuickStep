@@ -50,7 +50,7 @@ protobuf {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api fileTree(dir: 'libs', include: ['*.jar'])
     api project(':iconloaderlib')
     api project(':LauncherPluginLib')
     api group: 'com.google.protobuf.nano', name: 'protobuf-javanano', version: '3.1.0'
